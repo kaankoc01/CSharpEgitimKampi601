@@ -1,0 +1,25 @@
+﻿using CSharpEgitimKampi601.Entities;
+using MongoDB.Bson;
+
+namespace CSharpEgitimKampi601.Services
+{
+    public class CustomerOperations
+    {
+        public void AddCustomer(Customer customer)
+        {
+            var collection = new MongoDbConnection();
+            var customersCollection = collection.GetCustomersCollection();
+
+            var document = new BsonDocument
+            {
+                {"CustomerName",customer.CustomerName},
+                {"CustomerSurname",customer.CustomerSurname},
+                {"CustomerCity",customer.CustomerCity},
+                {"CustomerBalance",customer.CustomerBalance},
+                {"CustomerShoppingCount",customer.CustomerShoppingCount}
+            };
+            customersCollection.InsertOne(document);
+        }
+    }
+}
+
